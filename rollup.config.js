@@ -2,7 +2,7 @@
 /*
  * @Author: 徐庆凯
  * @Date: 2022-11-18 14:56:37
- * @LastEditTime: 2023-03-10 11:33:18
+ * @LastEditTime: 2023-03-10 15:01:11
  * @LastEditors: 徐庆凯
  * @Description:
  * @FilePath: \uni-read-pages-vite\rollup.config.js
@@ -42,11 +42,6 @@ const componentNames = fs
       name: p.name
     }
   })
-  .concat({
-    path: 'index',
-    name: 'index'
-  })
-console.log(componentNames)
 // 当前运行环境，可通过 cross-env 命令行设置
 // const env = process.env.NODE_ENV
 // umd/iife 模式的编译结果文件输出的全局变量名称
@@ -129,11 +124,11 @@ function createConfigs() {
     }, {}),
     output: {
       dir: 'lib',
-      chunkFileNames: '[name].js',
+      chunkFileNames: 'esm.js',
       format: 'es',
       banner: banner
     },
-    treeshake: false,
+    treeshake: true,
     plugins: [
       // 解析第三方依赖
       resolve({
