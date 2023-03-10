@@ -7,8 +7,8 @@
  * @FilePath: \uni-read-pages-vite\src\interfaces\index.ts
  * 记得注释
  */
-export type Config = {
-  includes: string[]
+export class Config {
+  includes: string[] = []
 }
 
 export type PlatformRule = 'h5' | 'app-plus' | 'app-lets' | 'mp-weixin' | 'mp-baidu' | 'mp-alipay' | 'mp-toutiao' | 'mp-qq' | 'mp-360'

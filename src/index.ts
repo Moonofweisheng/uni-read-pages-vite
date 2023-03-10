@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/ban-types */
 /*
  * @Author: 徐庆凯
  * @Date: 2022-11-18 18:37:32
- * @LastEditTime: 2023-03-10 13:05:03
+ * @LastEditTime: 2023-03-10 13:24:09
  * @LastEditors: 徐庆凯
  * @Description:
  * @FilePath: \uni-read-pages-vite\src\index.ts
@@ -19,24 +18,27 @@ function resolvePath(dir: string) {
 }
 
 class TransformPages {
-  public CONFIG: Config = {
+  private CONFIG: Config = {
     includes: ['meta', 'path', 'aliasPath', 'name']
   }
-  public pagesPath: string
-  public uniPagesJSON: any
+  // pages.json地址
+  private pagesPath: string
+  // Uni-app的pages.js导出的方法
+  private uniPagesJSON: any
+  // 路由表
   public routes: string[]
-  public platform: PlatformRule
+  // 平台
+  private platform: PlatformRule
+
   /**
    * 构造函数
    * @param config 保留字段配置
    * @param pagesPath pages.json 文件相对与项目根目录的位置
    */
-  constructor(config: Config, pagesPath: string) {
-    config = {
-      ...this.CONFIG,
-      ...config
+  constructor(config: Config = new Config(), pagesPath: string = './src') {
+    if (config && config.includes) {
+      this.CONFIG.includes = Array.from(new Set([...this.CONFIG.includes, ...config.includes]))
     }
-    this.CONFIG = config
     this.pagesPath = path.resolve(process.cwd(), pagesPath)
     this.uniPagesJSON = require(resolvePath('@dcloudio/uni-cli-shared/dist/json/pages.js'))
     this.platform = process.env['UNI_PLATFORM'] as PlatformRule
@@ -51,7 +53,7 @@ class TransformPages {
   /**
    * 通过读取pages.json文件 生成直接可用的routes
    */
-  getPagesRoutes(pages = this.pagesJson.pages, rootPath: String | null = null) {
+  getPagesRoutes(pages = this.pagesJson.pages, rootPath: string | null = null) {
     const routes: any[] = []
     let route: { [x: string]: any }, value
     pages.forEach((pItem: any, pIndex: number) => {
