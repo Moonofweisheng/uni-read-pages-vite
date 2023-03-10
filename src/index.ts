@@ -1,7 +1,7 @@
 /*
  * @Author: 徐庆凯
  * @Date: 2022-11-18 18:37:32
- * @LastEditTime: 2023-03-10 13:24:09
+ * @LastEditTime: 2023-03-10 14:27:11
  * @LastEditors: 徐庆凯
  * @Description:
  * @FilePath: \uni-read-pages-vite\src\index.ts
@@ -35,7 +35,7 @@ class TransformPages {
    * @param config 保留字段配置
    * @param pagesPath pages.json 文件相对与项目根目录的位置
    */
-  constructor(config: Config = new Config(), pagesPath: string = './src') {
+  constructor(pagesPath: string = './src', config?: Config) {
     if (config && config.includes) {
       this.CONFIG.includes = Array.from(new Set([...this.CONFIG.includes, ...config.includes]))
     }
