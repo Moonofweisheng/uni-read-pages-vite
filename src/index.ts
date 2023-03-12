@@ -1,7 +1,7 @@
 /*
  * @Author: 徐庆凯
  * @Date: 2022-11-18 18:37:32
- * @LastEditTime: 2023-03-10 14:27:11
+ * @LastEditTime: 2023-03-10 17:20:31
  * @LastEditors: 徐庆凯
  * @Description:
  * @FilePath: \uni-read-pages-vite\src\index.ts
@@ -26,7 +26,7 @@ class TransformPages {
   // Uni-app的pages.js导出的方法
   private uniPagesJSON: any
   // 路由表
-  public routes: string[]
+  public routes: Record<string, any>[]
   // 平台
   private platform: PlatformRule
 
@@ -54,24 +54,24 @@ class TransformPages {
    * 通过读取pages.json文件 生成直接可用的routes
    */
   getPagesRoutes(pages = this.pagesJson.pages, rootPath: string | null = null) {
-    const routes: any[] = []
-    let route: { [x: string]: any }, value
-    pages.forEach((pItem: any, pIndex: number) => {
-      route = {}
-      value = ''
-      this.CONFIG.includes.forEach((cItem, cIndex) => {
-        value = pItem[cItem]
-        if (cItem === 'path') {
+    const routes = []
+    for (let i = 0; i < pages.length; i++) {
+      const item = pages[i]
+      const route: Record<string, any> = {}
+      for (let j = 0; j < this.CONFIG.includes.length; j++) {
+        const key = this.CONFIG.includes[j]
+        let value = item[key]
+        if (key === 'path') {
           value = rootPath ? `/${rootPath}/${value}` : `/${value}`
         }
-        if (cItem === 'aliasPath' && pIndex == 0 && rootPath == null) {
-          route[cItem] = route[cItem] || '/'
-        } else {
-          route[cItem] = value ? value : {}
+        if (key === 'aliasPath' && i == 0 && rootPath == null) {
+          route[key] = route[key] || '/'
+        } else if (value !== undefined) {
+          route[key] = value
         }
-      })
+      }
       routes.push(route)
-    })
+    }
     return routes
   }
   /**
