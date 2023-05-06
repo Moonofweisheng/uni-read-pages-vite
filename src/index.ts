@@ -1,21 +1,5 @@
-/*
- * @Author: 徐庆凯
- * @Date: 2022-11-18 18:37:32
- * @LastEditTime: 2023-03-10 17:20:31
- * @LastEditors: 徐庆凯
- * @Description:
- * @FilePath: \uni-read-pages-vite\src\index.ts
- * 记得注释
- */
 import { Config, PlatformRule } from './interfaces/index'
 const path = require('path')
-const rootPath = path.resolve(process.cwd(), 'node_modules')
-/** 解析绝对路径
- * @param {Object} dir
- */
-function resolvePath(dir: string) {
-  return path.resolve(rootPath, dir)
-}
 
 class TransformPages {
   private CONFIG: Config = {
@@ -40,7 +24,7 @@ class TransformPages {
       this.CONFIG.includes = Array.from(new Set([...this.CONFIG.includes, ...config.includes]))
     }
     this.pagesPath = path.resolve(process.cwd(), pagesPath)
-    this.uniPagesJSON = require(resolvePath('@dcloudio/uni-cli-shared/dist/json/pages.js'))
+    this.uniPagesJSON = require('@dcloudio/uni-cli-shared/dist/json/pages.js')
     this.platform = process.env['UNI_PLATFORM'] as PlatformRule
     this.routes = this.getPagesRoutes().concat(this.getNotMpRoutes())
   }
