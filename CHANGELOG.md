@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://gitee.com/fant-mini/uni-read-pages-vite/compare/v0.0.5...v0.0.6) (2023-05-06)
+
+
+### Features
+
+* ✨ 支持在hbuilderX创建的项目中使用uni-read-pages-vite ([e77bff7](https://gitee.com/fant-mini/uni-read-pages-vite/commit/e77bff762326889c8af85f27dd92b147384f5666))
+
 ### [0.0.5](https://gitee.com/fant-mini/uni-read-pages-vite/compare/v0.0.4...v0.0.5) (2023-03-12)
 
 
